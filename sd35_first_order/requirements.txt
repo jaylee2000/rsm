@@ -1,0 +1,21 @@
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+# Match the CUDA 12.4 stack noted in the project README.
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+diffusers[torch]
+transformers
+peft
+openai-clip
+image-reward
+
+inflect
+typing_extensions>=4.14.0
+importlib_resources
+setuptools==70.3.0
+absl-py
+ml_collections
+
+tqdm
+wandb
+termcolor

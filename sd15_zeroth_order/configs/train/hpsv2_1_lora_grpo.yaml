@@ -1,0 +1,82 @@
+# HPSv2.1 + GRPO LoRA fine-tuning
+# Usage:
+#   accelerate launch train_grpo.py --config configs/train/hpsv2_1_lora_grpo.yaml
+
+# Model Load/Save
+pretrained_model: "runwayml/stable-diffusion-v1-5"
+revision: main
+variant: null
+resume_from_checkpoint: null
+run_name: null
+save_freq: 1
+use_lora: true
+
+# Prompt source
+prompt_file: "./prompts_dancegrpo.txt"
+
+# Evaluation
+eval_freq: 10
+eval_num_batches: 4
+eval_batch_size: 8
+eval_num_steps: 50
+
+# Variables to be set per experiment
+reward_fn: hps_v2
+algorithm: "uw-sigma" # "ddpo", "logrho", "vw", "uw-sigma", "uw-lambda"
+const_weight: 4.5 # null, 4.5 (uw-sigma), 0.5168997049331665 (uw-lambda)
+noise_matching_precision: bad # worst, bad, best
+train_do_clip: true
+train_clip_range: !!float 1e-4
+weight_scale_factor: 8.70575076181 # 1.0, 8.70575076181 (uw-sigma)
+
+sample_batch_size: 8 # per device, at once. should divide num_prompts_per_epoch * num_generations_per_prompt
+num_prompts_per_epoch: 8
+num_generations_per_prompt: 16 # images per prompt
+train_batch_size: 4 # per device
+train_gradient_accumulation_steps: 16
+
+learning_rate: !!float 3e-4
+num_train_epochs: 300
+
+### Sampling
+sample_eta: 1.0 # 1.0 for DDPM, 0.0 for DDIM
+sample_cfg_scale: 5.0
+sample_rg_scale: 1.0
+sample_num_steps: 50
+
+### Training
+train_timestep_fraction: 1.0
+clip_sample: false
+clip_sample_range: 1.0
+thresholding: false
+train_num_inner_epochs: 1
+train_cfg: true
+train_adv_clip_max: 5.0
+train_max_grad_norm: 1.0
+gradient_checkpointing: false
+enable_xformers_memory_efficient_attention: false
+rank: 16 # ignored when use_lora=false
+scale_lr: false # scale by #GPUs, gradient accumulation_steps, and batch size
+
+# Adam hyperparams
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_weight_decay: !!float 1e-4
+adam_epsilon: !!float 1e-8
+
+# Bits & precision
+use_8bit_adam: false
+allow_tf32: true
+mixed_precision: "fp16" # choices: "no", "fp16", "bf16"
+
+# Randomness
+seed: 42
+
+# I/O & logging
+logging_dir: logs
+hub_token: null
+hub_model_id: null
+report_to: wandb
+
+# Others
+debug: false

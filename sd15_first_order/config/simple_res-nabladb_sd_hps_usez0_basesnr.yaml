@@ -1,0 +1,89 @@
+model:
+  pretrained: "runwayml/stable-diffusion-v1-5"
+  revision: main
+  variant: null
+
+  resume_from_checkpoint: null
+
+  # LoRA config
+  use_lora: true
+  lora_rank: 8
+  lora_alpha: 8
+
+sample:
+  ## EFFECTIVE BATCH SIZE
+  # N=4 # 2 GPUS
+  # N * sample['batch_size'] * sample['num_batches_per_epoch']
+  # = 256 samples per epoch
+  batch_size: 8 # per device
+  num_batches_per_epoch: 8 # 16
+
+  eta: 1.0 # 1.0 for DDPM, 0.0 for DDIM
+  cfg_scale: 5.0
+  num_steps: 50
+
+train:
+  max_epochs: 100
+
+  ## EFFECTIVE BATCH SIZE
+  # (sample['batch_size'] * sample['num_batches_per_epoch'])
+  #    / (train['batch_size'] * train['gradient_accumulation_steps'])
+  #    = 2 gradient updates per epoch
+  batch_size: 1 # per device
+  gradient_accumulation_steps: 32 # 64
+
+  # Learning Rate
+  lr: !!float 4e-3
+  gradscaler_growth_interval: 2000
+  # scale_lr: false # scale by #GPUs, gradient accumulation_steps, and batch size
+
+  # Strategy
+  timestep_fraction: 0.2
+  low_var_subsampling: true
+  cfg: true
+  num_inner_epochs: 1
+
+  # Nabla-DB specific parameters
+  pretrained_strength: 'sigma'
+  pretrained_strength_sigma_scale: 1.0
+  reward_scale: !!float 5e5 # 1e4
+  reward_adaptive_mode: 'sigma'
+  reward_adaptive_sigma_scale: 1.0
+  use_z0: true
+  forward_loss_scale: 1.0
+  unet_reg_scale: !!float 1e2 # 1e3
+  normalize_unet_reg_by_one_minus_alpha_bar_t: false
+
+  gradient_checkpointing: false
+  max_grad_norm: 1.0
+  adam:
+    use_8bit: false
+    beta1: 0.9
+    beta2: 0.999
+    weight_decay: 1.0e-4 #0.01
+    epsilon: !!float 1e-8
+
+# Evaluation
+eval:
+  freq: 100 # evaluate every N epochs
+  num_batches: 8 # number of batches to evaluate
+  batch_size: 8 # evaluation batch size
+  num_steps: 50 # number of inference steps for evaluation
+
+# Save & Log
+save_freq: 1
+logging_dir: logs
+report_to: wandb
+
+reward_fn: "hpsv2_score_diff"
+prompt_fn: "geneval" # "hpd_photo_painting" # "hpd_prompts"
+prompt_fn_kwargs: {}
+
+per_prompt_stat_tracking: null
+
+# Bits & precision
+allow_tf32: True
+mixed_precision: "bf16"
+
+# Randomness
+seed: 42

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local environments and credentials
+.env
+.env.*
+[.]netrc
+
+# Experiment outputs and caches
+wandb/
+cache/
+.cache/
+hf_cache/
+logs/
+logs-old/
+old_logs/
+logs_backup/
+outputs/
+outputs*/
+saved_models/
+saved_models*/
+checkpoints/
+checkpoints*/
+geneval_eval_outputs/
+*.egg-info/
+*.log
+
+# Local dependency clones and downloaded assets
+node_modules/
+HPSv2/
+hps_ckpt/
+
+# Editor/history debris
+.history/
+.vscode/
+.idea/
+
+# Large generated model/checkpoint artifacts
+*.ckpt
+*.pt
+*.safetensors
+*.h5
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# etc
+.agents
+.codex

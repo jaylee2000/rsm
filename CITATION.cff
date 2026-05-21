@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying preprint."
+title: "Reward Score Matching: Unifying Reward-based Fine-tuning for Flow and Diffusion Models"
+type: software
+authors:
+  - family-names: Lee
+    given-names: Jeongjae
+    affiliation: "Graduate School of AI, KAIST"
+  - family-names: Chang
+    given-names: Jinho
+    affiliation: "Graduate School of AI, KAIST"
+  - family-names: Kim
+    given-names: Jeongsol
+    affiliation: "Graduate School of AI, KAIST"
+  - family-names: Ye
+    given-names: Jong Chul
+    affiliation: "Graduate School of AI, KAIST"
+year: 2026
+license: MIT
+url: "https://jeongsol-kim.github.io/rsm_projectpage/"
+identifiers:
+  - type: url
+    value: "https://arxiv.org/abs/2604.17415"
+preferred-citation:
+  type: article
+  title: "Reward Score Matching: Unifying Reward-based Fine-tuning for Flow and Diffusion Models"
+  authors:
+    - family-names: Lee
+      given-names: Jeongjae
+      affiliation: "Graduate School of AI, KAIST"
+    - family-names: Chang
+      given-names: Jinho
+      affiliation: "Graduate School of AI, KAIST"
+    - family-names: Kim
+      given-names: Jeongsol
+      affiliation: "Graduate School of AI, KAIST"
+    - family-names: Ye
+      given-names: Jong Chul
+      affiliation: "Graduate School of AI, KAIST"
+  year: 2026
+  url: "https://arxiv.org/abs/2604.17415"
