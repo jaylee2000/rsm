@@ -61,6 +61,16 @@ bash scripts/single_node/run_sd3.sh --list
 
 The launcher writes outputs according to the selected config. Review cache, checkpoint, and output paths before launching long runs.
 
+Example command for obtaining qualitative results:
+```bash
+export CHECKPOINT_ROOT="YOUR_CHECKPOINT_ROOT_FOLDER"    # e.g., "logs/electric-rain-89/checkpoints"
+export CHECKPOINT_EPOCH="EPOCH"                         # e.g., 180
+export PROMPT="YOUR PROMPT"                             # e.g., "a photo of a brown bed and a pink cell phone"
+export OUTPUT_DIR="YOUR_OUTPUT_DIR"                     # e.g., "qualitative-results"
+
+python scripts/qualitative_results_tempflowgrpo.py --checkpoint_epochs $CHECKPOINT_EPOCH --pretrained-model stabilityai/stable-diffusion-3.5-medium --prompt $PROMPT --images-per-prompt 1 --image-batch-size 1   --num-inference-steps 40   --guidance-scale 4.5   --height 512    --width 512   --attention-slicing off   --seed 42   --output-dir $OUTPUT_DIR --save-images --checkpoint-root $CHECKPOINT_ROOT
+```
+
 ## Notes
 
 - SD3.5-M runs were tested on CUDA 12.8 with 4 x H200 GPUs.
