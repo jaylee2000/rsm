@@ -11,7 +11,7 @@
 
 **TL;DR:** We unify reward-based fine-tuning algorithms for diffusion and flow generative models. This allows us to distinguish the fundamental design choices from others.
 
-> [Jeongjae Lee*](https://jaylee2000.github.io/), [Jinho Chang*](https://scholar.google.com/citations?user=GrHZicUAAAAJ&hl=ko), [Jeongsol Kim†](https://www.jeongsol.dev/), [Jong Chul Ye†](https://bispl.weebly.com/professor.html).
+> [Jeongjae Lee*](https://jaylee2000.github.io/), [Jinho Chang*](https://chang-jinho.github.io/), [Jeongsol Kim†](https://www.jeongsol.dev/), [Jong Chul Ye†](https://bispl.weebly.com/professor.html).
 >
 > KAIST
 
@@ -52,6 +52,10 @@ SD1.5 experiments were tested on CUDA 12.x with RTX 4090 GPUs (24GB VRAM).
 Package versions may need adjustment for different CUDA versions, CUDA 13.x, PyTorch wheels, xformers builds, or GPU microarchitectures.
 
 ## Reproducing Paper Runs
+
+### Figure 2
+
+See subdirectory ```toy_experiments``` to reproduce the analyses on different value gradient estimators.
 
 ### Figure 4(a), Ours
 
