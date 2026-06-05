@@ -19,6 +19,7 @@
 
 ## 🔥 News
 
+- [2026.06.02] RSM has been accepted as an **Oral presentation** at the SPIGM Workshop, ICML 2026!
 - [2026.05.21] Code released on Github!
 - [2026.05.07] Preprint updated on arXiv!
 - [2026.04.19] Preprint released on arXiv!
